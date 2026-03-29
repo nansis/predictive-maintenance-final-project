@@ -1,0 +1,38 @@
+name: Predictive Maintenance CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  ml-workflow:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas joblib huggingface_hub scikit-learn streamlit
+
+      - name: Verify deployment files exist
+        run: |
+          test -f deployment_files/app.py
+          test -f deployment_files/requirements.txt
+          test -f deployment_files/Dockerfile
+          test -f deployment_files/push_to_hf_space.py
+
+      - name: Run model smoke test
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          python scripts/model_smoke_test.py
