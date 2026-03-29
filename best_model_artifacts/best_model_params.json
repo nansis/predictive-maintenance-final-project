@@ -1,0 +1,4 @@
+{
+    "Model": "AdaBoost",
+    "Best_Parameters": "{'learning_rate': 0.05, 'n_estimators': 100}"
+}

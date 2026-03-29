@@ -1,0 +1,9 @@
+{
+    "Model": "AdaBoost",
+    "Best_Parameters": "{'learning_rate': 0.05, 'n_estimators': 100}",
+    "CV_Best_F1": 0.7752,
+    "Test_Accuracy": 0.6304,
+    "Test_Precision": 0.6304,
+    "Test_Recall": 1.0,
+    "Test_F1": 0.7733
+}
